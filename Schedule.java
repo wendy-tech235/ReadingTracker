@@ -1,33 +1,19 @@
 import java.util.*;
 public class Schedule{
     private int scheduleID;
-    private int bookID; 
-    private int pagePerDay;
     private int totalDays; 
-    
-    public Schedule(){
-        scheduleID = 000000;
-        bookID = 000000;
-        pagePerDay = 0;
-    }
+    private Book book;
+    private Tracker tracker;
 
-    public Schedule(int scheduleID, int bookID, int pagePerDay, int totalDays){
+    public Schedule(int scheduleID, int bookID, int pagePerDay, int totalDays, Book book, Tracker tracker){
         this.scheduleID = scheduleID;
-        this.bookID = bookID;
-        this.pagePerDay = pagePerDay;
         this.totalDays = totalDays;
+        this.book = book;
+        this.tracker = tracker; 
     }
 
     public int getScheduleID() {
         return scheduleID;
-    }
-
-    public int getBookID() {
-        return bookID;
-    }
-
-    public int getPagePerDay() {
-        return pagePerDay;
     }
 
     public int getTotalDays() {
@@ -38,45 +24,36 @@ public class Schedule{
         this.scheduleID = scheduleID;
     }
 
-    public void setBookID(int bookID) {
-        this.bookID = bookID;
-    }
-
-    public void setPagePerDay(int pagePerDay) {
-        this.pagePerDay = pagePerDay;
-    }
-
     public void setTotalDays(int totalDays) {
         this.totalDays = totalDays;
     }
 
-    public void suggestedSchedule(int totalPages, int totalDays){
-        System.out.println("Recommended page per day: " + totalPages/totalDays);
+    public void suggestedSchedule(){
+        System.out.println("Recommended page per day: " + book.getTotalPages()/totalDays);
     }
 
-    public void printSchedule(String bookName, int totalPages, int totalDays, int pagesPerDay, int currDay, int currPages){
+    public void printSchedule(int totalDays){
         Map<Integer, Integer> pagesTrack = new HashMap<>();
-        pagesTrack.put(currDay, currPages);
+        pagesTrack.put(tracker.getCurrDay(), tracker.getCurrPages()); 
         int remainDays = totalDays % 5;
         int day = 1;
-        System.out.println(bookName + " Schedule For Day " + currDay);
+        System.out.println(book.getBookName() + " Schedule For Day " + tracker.getCurrDay());
         for(int row = 1; row <= totalDays / 5; row++){
             for(int col = 1; col <= 5; col++){
                 if(day <= 10){
                     if (pagesTrack.get(day) != null) {
-                        System.out.print(day + " - " + pagesTrack.get(day)  + "/" + pagesPerDay + "     ");
+                        System.out.print(day + " - " + pagesTrack.get(day)  + "/" + tracker.getPagePerDay() + "     ");
                     }else{
-                        System.out.print(day + " - _"  + "/" + pagesPerDay + "     ");
+                        System.out.print(day + " - _"  + "/" + tracker.getPagePerDay() + "     ");
                     }      
                 }
                 else{
                     if (pagesTrack.get(day) != null) {
-                        System.out.print(day + " - " + pagesTrack.get(day)  + "/" + pagesPerDay + "    ");
+                        System.out.print(day + " - " + pagesTrack.get(day)  + "/" + tracker.getPagePerDay() + "    ");
                     }else{
-                        System.out.print(day + " - _"  + "/" + pagesPerDay + "    ");
+                        System.out.print(day + " - _"  + "/" + tracker.getPagePerDay() + "    ");
                     }  
-                }
-                    
+                }      
                 day++;
             }
             System.out.println(); 
@@ -86,15 +63,15 @@ public class Schedule{
            for(int remainDay = 0; remainDay < remainDays; remainDay++){
                 if(day <= 10){
                     if (pagesTrack.get(day) != null) {
-                        System.out.print(day + " - " + pagesTrack.get(day)  + "/" + pagesPerDay + "     ");
+                        System.out.print(day + " - " + pagesTrack.get(day)  + "/" + tracker.getPagePerDay() + "     ");
                     }else{
-                        System.out.print(day + " - _"  + "/" + pagesPerDay + "     ");
+                        System.out.print(day + " - _"  + "/" + tracker.getPagePerDay() + "     ");
                     }  
                 }else{
                     if (pagesTrack.get(day) != null) {
-                        System.out.print(day + " - " + pagesTrack.get(day)  + "/" + pagesPerDay + "    ");
+                        System.out.print(day + " - " + pagesTrack.get(day)  + "/" + tracker.getPagePerDay() + "    ");
                     }else{
-                        System.out.print(day + " - _"  + "/" + pagesPerDay + "    ");
+                        System.out.print(day + " - _"  + "/" + tracker.getPagePerDay() + "    ");
                     }  
                 }    
                 day++;
@@ -103,7 +80,7 @@ public class Schedule{
     }
 
     public static void main(String[] args) {
-        
+
     }
 }
 

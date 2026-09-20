@@ -39,5 +39,9 @@ public class Book{
         this.totalPages = totalPages;
     }
 
+    public static void main(String[] args) {
+        
+    }
+
     
 }
