@@ -103,8 +103,7 @@ public class Schedule{
     }
 
     public static void main(String[] args) {
-        Schedule schedule = new Schedule();
-        schedule.printSchedule("Stolen Crown", 1000, 18, 10, 7, 6);
+        
     }
 }
 
