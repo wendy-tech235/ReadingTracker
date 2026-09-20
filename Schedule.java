@@ -1,3 +1,4 @@
+import java.util.*;
 public class Schedule{
     private int scheduleID;
     private int bookID; 
@@ -53,4 +54,57 @@ public class Schedule{
         System.out.println("Recommended page per day: " + totalPages/totalDays);
     }
 
+    public void printSchedule(String bookName, int totalPages, int totalDays, int pagesPerDay, int currDay, int currPages){
+        Map<Integer, Integer> pagesTrack = new HashMap<>();
+        pagesTrack.put(currDay, currPages);
+        int remainDays = totalDays % 5;
+        int day = 1;
+        System.out.println(bookName + " Schedule For Day " + currDay);
+        for(int row = 1; row <= totalDays / 5; row++){
+            for(int col = 1; col <= 5; col++){
+                if(day <= 10){
+                    if (pagesTrack.get(day) != null) {
+                        System.out.print(day + " - " + pagesTrack.get(day)  + "/" + pagesPerDay + "     ");
+                    }else{
+                        System.out.print(day + " - _"  + "/" + pagesPerDay + "     ");
+                    }      
+                }
+                else{
+                    if (pagesTrack.get(day) != null) {
+                        System.out.print(day + " - " + pagesTrack.get(day)  + "/" + pagesPerDay + "    ");
+                    }else{
+                        System.out.print(day + " - _"  + "/" + pagesPerDay + "    ");
+                    }  
+                }
+                    
+                day++;
+            }
+            System.out.println(); 
+        }
+        
+        if (remainDays != 0) {
+           for(int remainDay = 0; remainDay < remainDays; remainDay++){
+                if(day <= 10){
+                    if (pagesTrack.get(day) != null) {
+                        System.out.print(day + " - " + pagesTrack.get(day)  + "/" + pagesPerDay + "     ");
+                    }else{
+                        System.out.print(day + " - _"  + "/" + pagesPerDay + "     ");
+                    }  
+                }else{
+                    if (pagesTrack.get(day) != null) {
+                        System.out.print(day + " - " + pagesTrack.get(day)  + "/" + pagesPerDay + "    ");
+                    }else{
+                        System.out.print(day + " - _"  + "/" + pagesPerDay + "    ");
+                    }  
+                }    
+                day++;
+            } 
+        }  
+    }
+
+    public static void main(String[] args) {
+        Schedule schedule = new Schedule();
+        schedule.printSchedule("Stolen Crown", 1000, 18, 10, 7, 6);
+    }
 }
+
