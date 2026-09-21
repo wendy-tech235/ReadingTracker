@@ -134,6 +134,7 @@ public class ReadingTracker {
                 Schedule schedule = schedules.get(scheduleIndex);
                 if (schedule.getPagesNotRead() == 0)
                     continue;
+                
                 System.out.println("Enter how many pages you read for book " + 
                     schedules.get(scheduleIndex).getBook().getBookName() + ", pages not read: " + schedule.getPagesNotRead());
                 int currPages = Integer.parseInt(scanner.nextLine());
@@ -145,7 +146,9 @@ public class ReadingTracker {
                 int leftPages = schedule.getPagesNotRead() - currPages;
                 if (leftPages > 0)
                     hasLeftPage = true;
+                
                 schedule.setPagesNotRead(leftPages);
+                
                 Tracker tracker = new Tracker(schedule, day, currPages, trackerID);
                 trackerID++;
                 this.trackers.get(scheduleIndex).add(tracker);
