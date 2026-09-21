@@ -4,6 +4,7 @@ public class Schedule {
     private int totalDays;
     private int pagesPerDay;
     private Book book;
+    private int pagesNotRead;
 
     public Schedule(int scheduleID, int totalDays, Book book) {
         this.scheduleID = scheduleID;
@@ -12,6 +13,7 @@ public class Schedule {
         this.pagesPerDay = Math.ceilDiv(this.book.getTotalPages(), totalDays);
         if (this.pagesPerDay == 0)
             this.pagesPerDay = 1;
+        this.pagesNotRead = book.getTotalPages();
     }
 
     public int getScheduleID() {
@@ -44,5 +46,13 @@ public class Schedule {
 
     public void setTotalDays(int totalDays) {
         this.totalDays = totalDays;
+    }
+
+    public int getPagesNotRead() {
+        return pagesNotRead;
+    }
+
+    public void setPagesNotRead(int pagesNotRead) {
+        this.pagesNotRead = pagesNotRead;
     }
 }

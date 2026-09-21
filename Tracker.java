@@ -1,4 +1,4 @@
-import java.util.*;
+
 public class Tracker {
     private int trackerID;
     private int numberOfPoints;
@@ -12,7 +12,6 @@ public class Tracker {
         this.currDay = currDay;
         this.currPages = currPages;
         this.trackerID = trackerID;
-
         // calculate earnPoints, numberOfPoints
     }
 
@@ -72,7 +71,6 @@ public class Tracker {
             }
         }
     }
-
 
     /*
     public int pointsAdded(){
