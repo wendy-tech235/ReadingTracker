@@ -1,15 +1,22 @@
-import java.util.*;
-public class Schedule{
-    private int scheduleID;
-    private int totalDays; 
-    private Book book;
-    private Tracker tracker;
 
-    public Schedule(int scheduleID, int totalDays, Book book, Tracker tracker){
+public class Schedule {
+
+    private int scheduleID;
+    private int totalDays;
+    private int pagesPerDay;
+    private Book book;
+
+    /*
+    private Tracker tracker;
+    private Map<Integer, Integer> pagesTrack = new HashMap<>();
+     */
+    public Schedule(int scheduleID, int totalDays, Book book) {
         this.scheduleID = scheduleID;
         this.totalDays = totalDays;
         this.book = book;
-        this.tracker = tracker; 
+        // this.tracker = tracker; 
+        // calcuate pages per day based on totalDays
+        this.pagesPerDay = this.book.getTotalPages() / totalDays;
     }
 
     public int getScheduleID() {
@@ -20,22 +27,32 @@ public class Schedule{
         return totalDays;
     }
 
-   public Book getBook() {
+    public Book getBook() {
         return book;
     }
 
+    public int getPagesPerDay() {
+        return pagesPerDay;
+    }
+
+    public void setPagesPerDay(int pagesPerDay) {
+        this.pagesPerDay = pagesPerDay;
+    }
+
+    /*
     public Tracker getTracker() {
         return tracker;
     }
-
+     */
     public void setBook(Book book) {
         this.book = book;
     }
 
+    /*
     public void setTracker(Tracker tracker) {
         this.tracker = tracker;
     }
-
+     */
     public void setScheduleID(int scheduleID) {
         this.scheduleID = scheduleID;
     }
@@ -44,8 +61,9 @@ public class Schedule{
         this.totalDays = totalDays;
     }
 
+    /*
     public void printSchedule(int totalDays){
-        Map<Integer, Integer> pagesTrack = new HashMap<>();
+        
         pagesTrack.put(tracker.getCurrDay(), tracker.getCurrPages()); 
         int remainDays = totalDays % 5;
         int day = 1;
@@ -89,13 +107,11 @@ public class Schedule{
                 day++;
             } 
         }  
+        System.out.println(); 
     }
-
+     */
     public static void main(String[] args) {
 
     }
 
- 
-
 }
-

@@ -1,26 +1,30 @@
-import java.util.Scanner;
-
-public class Tracker{
+public class Tracker {
     private int trackerID;
     private int numberOfPoints;
     private int earnPoints;
     private int currDay;
     private int currPages;
-    private int pagePerDay;
-    private Book book;
+    private Schedule schedule;
 
-    public Tracker(Book book, int currDay, int currPages, int earnPoints, int numberOfPoints, int pagePerDay, int trackerID) {
-        this.book = book;
+    public Tracker(Schedule schedule, int currDay, int currPages, int trackerID) {
+        this.schedule = schedule;
         this.currDay = currDay;
         this.currPages = currPages;
-        this.earnPoints = earnPoints;
-        this.numberOfPoints = numberOfPoints;
-        this.pagePerDay = pagePerDay;
         this.trackerID = trackerID;
+
+        // calculate earnPoints, numberOfPoints
     }
 
     public int getTrackerID() {
         return trackerID;
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 
     public int getNumberOfPoints() {
@@ -37,14 +41,6 @@ public class Tracker{
 
     public int getCurrPages() {
         return currPages;
-    }
-
-    public int getPagePerDay() {
-        return pagePerDay;
-    }
-
-    public Book getBook() {
-        return book;
     }
 
     public void setTrackerID(int trackerID) {
@@ -67,14 +63,17 @@ public class Tracker{
         this.currPages = currPages;
     }
 
-    public void setPagePerDay(int pagePerDay) {
-        this.pagePerDay = pagePerDay;
+    public void calander(){
+        int remainDays = schedule.getTotalDays() % 5;
+        for(int row = 1; row <= schedule.getTotalDays()/ 5; row++){
+            for(int col = 1; col <= 5; col++){
+                
+            }
+        }
     }
 
-    public void setBook(Book book) {
-        this.book = book;
-    }
 
+    /*
     public int pointsAdded(){
         int diff = getCurrPages() - getPagePerDay();
         int ret = 0;
@@ -90,14 +89,14 @@ public class Tracker{
 
     public void dailySummary(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Day " + getCurrDay());
-        System.out.println("Do you want to change your goal? (type yes or no, type anything else and I will find you...)");
+        System.out.println("Do you want to change your goal? (type yes or no)");
         String temp = scanner.nextLine();
         if(temp.equals("yes")){
             System.out.println("Enter new goal: ");
             setPagePerDay(Integer.parseInt(scanner.nextLine()));
         }
-        System.out.println("Enter how many pages you read for " + book.getBookName());
+
+        System.out.println("Enter how many pages you read for " + book.getBookName() + " (your goal is " + pagePerDay + ")");
         setCurrPages(Integer.parseInt(scanner.nextLine())); 
         setEarnPoints(pointsAdded());
         setNumberOfPoints(getNumberOfPoints() + pointsAdded());
@@ -110,7 +109,7 @@ public class Tracker{
         }else{
             System.out.println("Goal not met" );
         }
-        this.currDay = currDay++;
 
     }
+     */
 }
