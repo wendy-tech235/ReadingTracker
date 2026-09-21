@@ -31,41 +31,33 @@ public class ReadingTracker {
     }
     
     public void setUpBooks() {
-        try {
-            System.out.println("How many books are you reading?");
-            int numBooks = Integer.parseInt(scanner.nextLine());
-            for (int i = 0; i < numBooks; i++) {
-                System.out.println("-------------------");
-                System.out.println("Book " + (i + 1));
+        System.out.println("How many books are you reading?");
+        int numBooks = Integer.parseInt(scanner.nextLine());
+        for (int i = 0; i < numBooks; i++) {
+            System.out.println("-------------------");
+            System.out.println("Book " + (i + 1));
 
-                System.out.println("Enter book name:");
-                String bookName = scanner.nextLine();
+            System.out.println("Enter book name:");
+            String bookName = scanner.nextLine();
 
-                System.out.println("Enter total book pages:");
-                int totalPages = Integer.parseInt(scanner.nextLine());
+            System.out.println("Enter total book pages:");
+            int totalPages = Integer.parseInt(scanner.nextLine());
 
-                Book book = new Book(bookName, i, totalPages);
-                books.add(book);
-            }
-            System.out.println();
-            System.out.println("Good choices!");
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
+            Book book = new Book(bookName, i, totalPages);
+            books.add(book);
         }
+        System.out.println();
+        System.out.println("Good choices!");
     }
 
     public void setUpSchedules(){
-        try {
-            for (int i = 0; i < books.size(); i++) {
-                System.out.println("--------------------");
-                System.out.println("Book " + (i + 1) + ", book name: " + books.get(i).getBookName());
-                System.out.println("Enter how many days you want to finish " + books.get(i).getBookName());
-                int totalDays = Integer.parseInt(scanner.nextLine());
-                Schedule schedule = new Schedule(i, totalDays, books.get(i));
-                schedules.add(schedule);
-            }
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
+        for (int i = 0; i < books.size(); i++) {
+            System.out.println("--------------------");
+            System.out.println("Book " + (i + 1) + ", book name: " + books.get(i).getBookName());
+            System.out.println("Enter how many days you want to finish " + books.get(i).getBookName());
+            int totalDays = Integer.parseInt(scanner.nextLine());
+            Schedule schedule = new Schedule(i, totalDays, books.get(i));
+            schedules.add(schedule);
         }
     }
 
