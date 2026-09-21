@@ -5,7 +5,7 @@ public class Schedule{
     private Book book;
     private Tracker tracker;
 
-    public Schedule(int scheduleID, int bookID, int pagePerDay, int totalDays, Book book, Tracker tracker){
+    public Schedule(int scheduleID, int totalDays, Book book, Tracker tracker){
         this.scheduleID = scheduleID;
         this.totalDays = totalDays;
         this.book = book;
@@ -20,16 +20,28 @@ public class Schedule{
         return totalDays;
     }
 
+   public Book getBook() {
+        return book;
+    }
+
+    public Tracker getTracker() {
+        return tracker;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public void setTracker(Tracker tracker) {
+        this.tracker = tracker;
+    }
+
     public void setScheduleID(int scheduleID) {
         this.scheduleID = scheduleID;
     }
 
     public void setTotalDays(int totalDays) {
         this.totalDays = totalDays;
-    }
-
-    public void suggestedSchedule(){
-        System.out.println("Recommended page per day: " + book.getTotalPages()/totalDays);
     }
 
     public void printSchedule(int totalDays){
@@ -82,5 +94,8 @@ public class Schedule{
     public static void main(String[] args) {
 
     }
+
+ 
+
 }
 
