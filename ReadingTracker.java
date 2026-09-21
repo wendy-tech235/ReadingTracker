@@ -95,7 +95,7 @@ public class ReadingTracker {
     }
 
     public void printCalendar(Schedule schedule, int scheduleIndex) {
-        int totalDays = schedule.getTotalDays();
+        int totalDays = trackers.get(scheduleIndex).size();
         int pagesPerDay = schedule.getPagesPerDay();
         int day = 0;
 
@@ -116,8 +116,7 @@ public class ReadingTracker {
                 String result = "_/" + pagesPerDay;
 
                 if (day < trackers.get(scheduleIndex).size()) {
-                    int pagesRead =
-                        trackers.get(scheduleIndex).get(day).getCurrPages();
+                    int pagesRead = trackers.get(scheduleIndex).get(day).getCurrPages();
 
                     if (pagesRead > 0) {
                         result = pagesRead + "/" + pagesPerDay;
@@ -134,10 +133,11 @@ public class ReadingTracker {
     }
     
     public void trackReading() {
-        int maxDays = caculateMaxDays();
-        for (int day = 0; day < maxDays; day++) {
+        int day = 0;
+        while (true) {
             System.out.println("--------------------");
             System.out.println("For Day of " + (day + 1));
+            boolean hasLeftPage = false;
             for (int scheduleIndex = 0; scheduleIndex < schedules.size(); scheduleIndex++) {
                 Schedule schedule = schedules.get(scheduleIndex);
                 if (schedule.getPagesNotRead() == 0)
@@ -146,14 +146,21 @@ public class ReadingTracker {
                     schedules.get(scheduleIndex).getBook().getBookName() + ", pages not read: " + schedule.getPagesNotRead());
                 int currPages = Integer.parseInt(scanner.nextLine());
                 if (currPages >= schedule.getPagesNotRead()) {
-                    System.out.println("Only " + schedule.getPagesNotRead() + " pages left, so today count " + schedule.getPagesNotRead() + " pages read.");
+                    System.out.println("Only " + schedule.getPagesNotRead() + 
+                        " pages left, so today count " + schedule.getPagesNotRead() + " pages read.");
                     currPages = schedule.getPagesNotRead();
                 }
-                schedule.setPagesNotRead(schedule.getPagesNotRead() - currPages);
+                int leftPages = schedule.getPagesNotRead() - currPages;
+                if (leftPages > 0)
+                    hasLeftPage = true;
+                schedule.setPagesNotRead(leftPages);
                 Tracker tracker = new Tracker(schedule, day, currPages, trackerID);
                 trackerID++;
                 this.trackers.get(scheduleIndex).add(tracker);
             }
+            if (!hasLeftPage)
+                break;
+            day++;
         }        
     }
 
