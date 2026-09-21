@@ -2,6 +2,7 @@ import java.util.*;
 public class ReadingTracker{
     private List<Book> books;
     private List<Schedule> schedules;
+<<<<<<< HEAD
     private int trackerID = 0;
     private List<List<Tracker>> trackers;
     private static int DAYS_PER_ROW = 3;
@@ -10,6 +11,11 @@ public class ReadingTracker{
         this.books = new ArrayList<>();
         this.schedules = new ArrayList<>();
         this.trackers = new ArrayList<>();
+=======
+    public ReadingTracker(List<Book> books, List<Schedule> schedules) {
+        this.books = books;
+        this.schedules = schedules;
+>>>>>>> parent of 5b925b8 (main functions and others)
     }
 
     public List<Book> getBooks() {
@@ -20,8 +26,11 @@ public class ReadingTracker{
         return schedules;
     }
 
+<<<<<<< HEAD
  
 
+=======
+>>>>>>> parent of 5b925b8 (main functions and others)
     public void setBooks(List<Book> books) {
         this.books = books;
     }
@@ -29,7 +38,6 @@ public class ReadingTracker{
     public void setSchedules(List<Schedule> schedules) {
         this.schedules = schedules;
     }
-    
 
     public void setUpBooks(){
         Scanner scanner = new Scanner(System.in);
@@ -45,6 +53,7 @@ public class ReadingTracker{
             Book book = new Book(bookName, i, totalPages);
             books.add(book);
         }
+<<<<<<< HEAD
         System.out.println("Good choices!");
     }
 
@@ -137,4 +146,12 @@ public class ReadingTracker{
         readingTracker.report();
     }
     
+=======
+    }
+
+    public static void main(String[] args) {
+        ReadingTracker readingTracker = new ReadingTracker(new ArrayList<>(), new ArrayList<>());
+        readingTracker.setUpBooks();
+    }
+>>>>>>> parent of 5b925b8 (main functions and others)
 }

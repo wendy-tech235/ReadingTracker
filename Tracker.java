@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 public class Tracker {
+=======
+public class Tracker{
+>>>>>>> parent of 5b925b8 (main functions and others)
     private int trackerID;
     private int numberOfPoints;
     private int earnPoints;
@@ -61,6 +65,7 @@ public class Tracker {
         this.currPages = currPages;
     }
 
+<<<<<<< HEAD
     public void calander(){
         int remainDays = schedule.getTotalDays() % 5;
         for(int row = 1; row <= schedule.getTotalDays()/ 5; row++){
@@ -70,3 +75,20 @@ public class Tracker {
         }
     }
 }
+=======
+    public void setPagePerDay(int pagePerDay) {
+        this.pagePerDay = pagePerDay;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+
+    
+
+
+
+
+}
+>>>>>>> parent of 5b925b8 (main functions and others)
