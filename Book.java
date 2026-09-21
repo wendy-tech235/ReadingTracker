@@ -1,18 +1,18 @@
-public class Book{
+public class Book {
     private String bookName;
     private int bookID;
     private int totalPages;
 
-    public Book(){
-        bookName = "book";
-        bookID = 000000;
+    public Book() {
+        bookName = "";
+        bookID = 0;
         totalPages = 0;
     }
 
-    public Book(String bookName, int bookID, int totalPage){
+    public Book(String bookName, int bookID, int totalPages){
         this.bookName = bookName;
         this.bookID = bookID;
-        this.bookName = bookName;
+        this.totalPages = totalPages;
     }
 
     public String getBookName() {
@@ -38,10 +38,4 @@ public class Book{
     public void setTotalPages(int totalPages) {
         this.totalPages = totalPages;
     }
-
-    public static void main(String[] args) {
-        
-    }
-
-    
 }

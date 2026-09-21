@@ -1,8 +1,5 @@
-<<<<<<< HEAD
+import java.util.*;
 public class Tracker {
-=======
-public class Tracker{
->>>>>>> parent of 5b925b8 (main functions and others)
     private int trackerID;
     private int numberOfPoints;
     private int earnPoints;
@@ -15,6 +12,8 @@ public class Tracker{
         this.currDay = currDay;
         this.currPages = currPages;
         this.trackerID = trackerID;
+
+        // calculate earnPoints, numberOfPoints
     }
 
     public int getTrackerID() {
@@ -65,7 +64,6 @@ public class Tracker{
         this.currPages = currPages;
     }
 
-<<<<<<< HEAD
     public void calander(){
         int remainDays = schedule.getTotalDays() % 5;
         for(int row = 1; row <= schedule.getTotalDays()/ 5; row++){
@@ -74,21 +72,45 @@ public class Tracker{
             }
         }
     }
-}
-=======
-    public void setPagePerDay(int pagePerDay) {
-        this.pagePerDay = pagePerDay;
+
+
+    /*
+    public int pointsAdded(){
+        int diff = getCurrPages() - getPagePerDay();
+        int ret = 0;
+        if (diff > 0){
+            ret += diff / 3;
+        }else if(diff == 0){
+            ret++;
+        }else{
+            ret--;
+        }
+        return ret;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void dailySummary(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Do you want to change your goal? (type yes or no)");
+        String temp = scanner.nextLine();
+        if(temp.equals("yes")){
+            System.out.println("Enter new goal: ");
+            setPagePerDay(Integer.parseInt(scanner.nextLine()));
+        }
+
+        System.out.println("Enter how many pages you read for " + book.getBookName() + " (your goal is " + pagePerDay + ")");
+        setCurrPages(Integer.parseInt(scanner.nextLine())); 
+        setEarnPoints(pointsAdded());
+        setNumberOfPoints(getNumberOfPoints() + pointsAdded());
+        System.out.println(book.getBookName()+ ":");
+        System.out.println("Earn points: " + getEarnPoints());
+        System.out.println("Total points: " + getNumberOfPoints());
+        System.out.println("Total pages read: " + getCurrPages());
+        if(pointsAdded() >= 0){
+            System.out.println("Congrats! Goal met!" );
+        }else{
+            System.out.println("Goal not met" );
+        }
+
     }
-
-
-    
-
-
-
-
+     */
 }
->>>>>>> parent of 5b925b8 (main functions and others)

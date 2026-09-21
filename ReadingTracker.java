@@ -1,21 +1,17 @@
 import java.util.*;
-public class ReadingTracker{
+
+public class ReadingTracker {
     private List<Book> books;
     private List<Schedule> schedules;
-<<<<<<< HEAD
     private int trackerID = 0;
     private List<List<Tracker>> trackers;
-    private static int DAYS_PER_ROW = 3;
+    private static int DAYS_PER_ROW = 5;
+    private Scanner scanner = new Scanner(System.in);
 
     public ReadingTracker() {
         this.books = new ArrayList<>();
         this.schedules = new ArrayList<>();
         this.trackers = new ArrayList<>();
-=======
-    public ReadingTracker(List<Book> books, List<Schedule> schedules) {
-        this.books = books;
-        this.schedules = schedules;
->>>>>>> parent of 5b925b8 (main functions and others)
     }
 
     public List<Book> getBooks() {
@@ -26,11 +22,6 @@ public class ReadingTracker{
         return schedules;
     }
 
-<<<<<<< HEAD
- 
-
-=======
->>>>>>> parent of 5b925b8 (main functions and others)
     public void setBooks(List<Book> books) {
         this.books = books;
     }
@@ -38,41 +29,53 @@ public class ReadingTracker{
     public void setSchedules(List<Schedule> schedules) {
         this.schedules = schedules;
     }
+    
+    public void setUpBooks() {
+        try {
+            System.out.println("How many books are you reading?");
+            int numBooks = Integer.parseInt(scanner.nextLine());
+            for (int i = 0; i < numBooks; i++) {
+                System.out.println("-------------------");
+                System.out.println("Book " + (i + 1));
 
-    public void setUpBooks(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("How many books are you reading?");
-        int numBooks = Integer.parseInt(scanner.nextLine());
-        for (int i = 0; i < numBooks; i++) {
-            System.out.println("Enter book name:");
-            String bookName = scanner.nextLine();
+                System.out.println("Enter book name:");
+                String bookName = scanner.nextLine();
 
-            System.out.println("Enter total book pages:");
-            int totalPages = Integer.parseInt(scanner.nextLine());
+                System.out.println("Enter total book pages:");
+                int totalPages = Integer.parseInt(scanner.nextLine());
 
-            Book book = new Book(bookName, i, totalPages);
-            books.add(book);
+                Book book = new Book(bookName, i, totalPages);
+                books.add(book);
+            }
+            System.out.println();
+            System.out.println("Good choices!");
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
         }
-<<<<<<< HEAD
-        System.out.println("Good choices!");
     }
 
     public void setUpSchedules(){
-        Scanner scanner = new Scanner(System.in);
-        for(int i = 0; i < books.size(); i++){
-            System.out.println("Enter how many days you want to finish " + books.get(i).getBookName());
-            int totalDays = Integer.parseInt(scanner.nextLine());
-            Schedule schedule = new Schedule(i, totalDays, this.books.get(i));
-            schedules.add(schedule);
+        try {
+            for (int i = 0; i < books.size(); i++) {
+                System.out.println("--------------------");
+                System.out.println("Book " + (i + 1) + ", book name: " + books.get(i).getBookName());
+                System.out.println("Enter how many days you want to finish " + books.get(i).getBookName());
+                int totalDays = Integer.parseInt(scanner.nextLine());
+                Schedule schedule = new Schedule(i, totalDays, this.books.get(i));
+                schedules.add(schedule);
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
         }
     }
 
     public void printSchedule() {
+        System.out.println("--------------------");
+        System.out.printf("%-10s %-30s %12s %12s %12s%n","Book ID", "Book Name", "Total Pages", "Total Days", "Pages/Day");
         for (Schedule schedule : schedules) {
-            System.out.println("--------------------");
-            System.out.println(schedule.getBook().getBookName());
-            System.out.println("Days to finish " + schedule.getTotalDays());
-            System.out.println();
+            Book book = schedule.getBook();
+            System.out.printf("%-10d %-30s %12d %12d %12d%n", book.getBookID(), book.getBookName(), 
+                book.getTotalPages(), schedule.getTotalDays(), schedule.getPagesPerDay());
         }
     }
 
@@ -83,6 +86,14 @@ public class ReadingTracker{
         return maxDays;
     }
 
+    public void printBooksInfo() {
+        System.out.println("--------------------");
+        System.out.printf("%-10s %-30s %12s%n","Book ID", "Book Name", "Total Pages");
+        for (Book book : books) {
+            System.out.printf("%-10d %-30s %12d%n", book.getBookID(), book.getBookName(), book.getTotalPages());
+        }
+    }
+
     public void printCalendar(Schedule schedule, int scheduleIndex) {
         int rows = schedule.getTotalDays() / DAYS_PER_ROW;
         int day = 0;
@@ -91,6 +102,7 @@ public class ReadingTracker{
                 Book book = schedule.getBook();
                 if (trackers.get(scheduleIndex).get(day).getCurrPages() != 0){
                     System.out.print(trackers.get(scheduleIndex).get(day).getCurrPages() + "/" + schedule.getPagesPerDay() + "    ");
+                    System.out.print(schedule.getPagesPerDay() + "    ");
                 }    
                 else{
                     System.out.print("_" + "/" + schedule.getPagesPerDay());
@@ -133,25 +145,29 @@ public class ReadingTracker{
     public static void main(String[] args) {
         ReadingTracker readingTracker = new ReadingTracker();
 
+        System.out.println("         Step 1: Setup Book Information");
+        System.out.println("         ==============================");
         readingTracker.setUpBooks();
         System.out.println();
+        readingTracker.printBooksInfo();
+        System.out.println();
+        System.out.println();
 
+        System.out.println("         Step 2: Setup Schedules");
+        System.out.println("         =======================");
         readingTracker.setUpSchedules();
         System.out.println();
         readingTracker.printSchedule();
+        System.out.println();
+        System.out.println();
 
+        System.out.println("         Step 3: Track Reading");
+        System.out.println("         =======================");
+        /*
         readingTracker.initSchedules();
 
         readingTracker.track();
         readingTracker.report();
+        */
     }
-    
-=======
-    }
-
-    public static void main(String[] args) {
-        ReadingTracker readingTracker = new ReadingTracker(new ArrayList<>(), new ArrayList<>());
-        readingTracker.setUpBooks();
-    }
->>>>>>> parent of 5b925b8 (main functions and others)
 }
