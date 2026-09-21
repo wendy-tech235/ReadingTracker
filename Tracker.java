@@ -11,8 +11,6 @@ public class Tracker {
         this.currDay = currDay;
         this.currPages = currPages;
         this.trackerID = trackerID;
-
-        // calculate earnPoints, numberOfPoints
     }
 
     public int getTrackerID() {
@@ -71,45 +69,4 @@ public class Tracker {
             }
         }
     }
-
-
-    /*
-    public int pointsAdded(){
-        int diff = getCurrPages() - getPagePerDay();
-        int ret = 0;
-        if (diff > 0){
-            ret += diff / 3;
-        }else if(diff == 0){
-            ret++;
-        }else{
-            ret--;
-        }
-        return ret;
-    }
-
-    public void dailySummary(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Do you want to change your goal? (type yes or no)");
-        String temp = scanner.nextLine();
-        if(temp.equals("yes")){
-            System.out.println("Enter new goal: ");
-            setPagePerDay(Integer.parseInt(scanner.nextLine()));
-        }
-
-        System.out.println("Enter how many pages you read for " + book.getBookName() + " (your goal is " + pagePerDay + ")");
-        setCurrPages(Integer.parseInt(scanner.nextLine())); 
-        setEarnPoints(pointsAdded());
-        setNumberOfPoints(getNumberOfPoints() + pointsAdded());
-        System.out.println(book.getBookName()+ ":");
-        System.out.println("Earn points: " + getEarnPoints());
-        System.out.println("Total points: " + getNumberOfPoints());
-        System.out.println("Total pages read: " + getCurrPages());
-        if(pointsAdded() >= 0){
-            System.out.println("Congrats! Goal met!" );
-        }else{
-            System.out.println("Goal not met" );
-        }
-
-    }
-     */
 }

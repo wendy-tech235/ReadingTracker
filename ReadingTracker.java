@@ -55,12 +55,6 @@ public class ReadingTracker{
             int totalDays = Integer.parseInt(scanner.nextLine());
             Schedule schedule = new Schedule(i, totalDays, this.books.get(i));
             schedules.add(schedule);
-
-            // System.out.println("Enter how many pages you want to read per day for " + books.get(i).getBookName());
-            // int pagePerDay = Integer.parseInt(scanner.nextLine());
-            // Tracker tracker = new Tracker(books.get(i), 1, schedules.get(i).getTotalDays(), 0, 0, pagePerDay, i);
-            // schedules.get(i).setTracker(tracker);
-            // trackers.add(tracker);
         }
     }
 
@@ -86,10 +80,13 @@ public class ReadingTracker{
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < DAYS_PER_ROW; col++) {
                 Book book = schedule.getBook();
-                if (trackers.get(scheduleIndex).get(day).getCurrPages() != 0)
-                    System.out.print(trackers.get(scheduleIndex).get(day).getCurrPages() + " / " + schedule.getPagesPerDay() + "    ");
-                else
-                    System.out.print("_" + "2/ " + schedule.getPagesPerDay());
+                if (trackers.get(scheduleIndex).get(day).getCurrPages() != 0){
+                    System.out.print(trackers.get(scheduleIndex).get(day).getCurrPages() + "/" + schedule.getPagesPerDay() + "    ");
+                }    
+                else{
+                    System.out.print("_" + "/" + schedule.getPagesPerDay());
+                }
+                    
             }
             System.out.println();
         }
@@ -124,37 +121,6 @@ public class ReadingTracker{
         }
     }
 
-    /*
-    public void report(){
-        for(int i = 0; i < books.size(); i++){
-            System.out.println("Day " + trackers.get(i).getCurrDay() + " for " + books.get(i).getBookName());
-            trackers.get(i).dailySummary();
-            schedules.get(i).printSchedule(schedules.get(i).getTotalDays());
-            System.out.println();
-        }
- 
-    }
-    */
-
-    /*
-    public void daily(ReadingTracker readingTracker){
-        Scanner scanner = new Scanner(System.in);
-        int max = -1;
-        for(int i = 0; i < books.size(); i++){
-            if (max < schedules.get(i).getTotalDays()) {
-                max = schedules.get(i).getTotalDays();
-            }
-        }
-        for(int i = 1; i <= max; i++){
-            readingTracker.report();
-            System.out.println("Type anthing and enter to go to the next day");
-            String useless = scanner.nextLine();
-            System.out.println();
-            trackers.get(1).setCurrDay(trackers.get(1).getCurrDay() + 1);
-        }
-    }
-        */
-
     public static void main(String[] args) {
         ReadingTracker readingTracker = new ReadingTracker();
 
@@ -167,9 +133,6 @@ public class ReadingTracker{
 
         readingTracker.initSchedules();
 
-        
-
-        // readingTracker.daily(readingTracker);
         readingTracker.track();
         readingTracker.report();
     }
