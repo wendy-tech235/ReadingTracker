@@ -1,4 +1,4 @@
-
+import java.util.*;
 public class Schedule {
     private int scheduleID;
     private int totalDays;
@@ -10,7 +10,7 @@ public class Schedule {
         this.scheduleID = scheduleID;
         this.totalDays = totalDays;
         this.book = book;
-        this.pagesPerDay = Math.ceilDiv(this.book.getTotalPages(), totalDays);
+        this.pagesPerDay = this.book.getTotalPages()/totalDays;
         if (this.pagesPerDay == 0)
             this.pagesPerDay = 1;
         this.pagesNotRead = book.getTotalPages();

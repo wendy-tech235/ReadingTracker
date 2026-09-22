@@ -235,3 +235,10 @@ public class ReadingTracker {
         readingTracker.report();
     }
 }
+//Neev
+//Good: the code checked for all the wrong answeres and kept reprompting until the right type was inputted.
+//Improvement: Maybe make restrict unreasonable amounts of pages read in a day.
+//The wording on the calender is a bit confusing
+//When saying I read more pages than the book is long it doesn't flag
+//You can't read partial pages
+//Lucas Vanasse only breaks if you read a billion pages a day
