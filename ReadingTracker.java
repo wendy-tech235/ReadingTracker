@@ -29,10 +29,36 @@ public class ReadingTracker {
     public void setSchedules(List<Schedule> schedules) {
         this.schedules = schedules;
     }
+
+    public int inputVaildPosInt(String prompt) {
+        int haha = 0;
+        System.out.println(prompt);
+        while (true) {
+            boolean isValid = true;
+            int value = 0;
+            String textValue = scanner.nextLine();
+            try {
+                value = Integer.parseInt(textValue); 
+                if(value <= 0)
+                    isValid = false;
+            } catch (Exception e) {
+                isValid = false;
+            }
+            if (isValid) {
+                if(haha > 0)
+                    System.out.println("See that wasn't so hard :D");
+                return value;
+            } else {
+                System.out.println("ENTER A POSITIVE INTEGER!!!!!");
+                haha++;
+            }
+        }
+    }
     
     public void setUpBooks() {
-        System.out.println("How many books are you reading?");
-        int numBooks = Integer.parseInt(scanner.nextLine());
+        //System.out.println("How many books are you reading?");
+        //int numBooks = Integer.parseInt(scanner.nextLine());
+        int numBooks = inputVaildPosInt("How many books are you reading?");
         for (int i = 0; i < numBooks; i++) {
             System.out.println("-------------------");
             System.out.println("Book " + (i + 1));
@@ -40,8 +66,9 @@ public class ReadingTracker {
             System.out.println("Enter book name:");
             String bookName = scanner.nextLine();
 
-            System.out.println("Enter total book pages:");
-            int totalPages = Integer.parseInt(scanner.nextLine());
+            //System.out.println("Enter total book pages:");
+            //int totalPages = Integer.parseInt(scanner.nextLine());
+            int totalPages = inputVaildPosInt("Enter total book pages:");
 
             Book book = new Book(bookName, i, totalPages);
             books.add(book);
@@ -54,8 +81,9 @@ public class ReadingTracker {
         for (int i = 0; i < books.size(); i++) {
             System.out.println("--------------------");
             System.out.println("Book " + (i + 1) + ", book name: " + books.get(i).getBookName());
-            System.out.println("Enter how many days you want to finish " + books.get(i).getBookName());
-            int totalDays = Integer.parseInt(scanner.nextLine());
+            //System.out.println("Enter how many days you want to finish " + books.get(i).getBookName());
+            //int totalDays = Integer.parseInt(scanner.nextLine());
+            int totalDays = inputVaildPosInt("Enter how many days you want to finish " + books.get(i).getBookName());
             Schedule schedule = new Schedule(i, totalDays, books.get(i));
             schedules.add(schedule);
         }
@@ -135,9 +163,11 @@ public class ReadingTracker {
                 if (schedule.getPagesNotRead() == 0)
                     continue;
                 
-                System.out.println("Enter how many pages you read for book " + 
+                //System.out.println("Enter how many pages you read for book " + 
+                    //schedules.get(scheduleIndex).getBook().getBookName() + ", pages not read: " + schedule.getPagesNotRead());
+                //int currPages = Integer.parseInt(scanner.nextLine());
+                int currPages = inputVaildPosInt("Enter how many pages you read for book " + 
                     schedules.get(scheduleIndex).getBook().getBookName() + ", pages not read: " + schedule.getPagesNotRead());
-                int currPages = Integer.parseInt(scanner.nextLine());
                 if (currPages >= schedule.getPagesNotRead()) {
                     System.out.println("Only " + schedule.getPagesNotRead() + 
                         " pages left, so today count " + schedule.getPagesNotRead() + " pages read.");
