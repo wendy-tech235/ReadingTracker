@@ -39,7 +39,7 @@ public class ReadingTracker {
             String textValue = scanner.nextLine();
             try {
                 value = Integer.parseInt(textValue); 
-                if(value <= 0)
+                if(value <= 0 || value > 1000)
                     isValid = false;
             } catch (Exception e) {
                 isValid = false;
@@ -47,8 +47,12 @@ public class ReadingTracker {
             if (isValid) {
                 if(haha > 0)
                     System.out.println("See that wasn't so hard :D");
+
                 return value;
-            } else {
+            }else if(value > 1000){ 
+                System.out.println("There is no way your reading that much, you are an alien and I'm calling Area 51...please enter lower than 1000");
+                haha++;
+            }else {
                 System.out.println("ENTER A POSITIVE INTEGER!!!!!");
                 haha++;
             }
