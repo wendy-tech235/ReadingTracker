@@ -51,7 +51,7 @@ public class ReadingTracker {
                 return value;
             }else if(value > 1000){ 
                 System.out.println("There is no way your reading that much, you are an alien and I'm calling Area 51...please enter lower than 1000");
-                haha++;
+                haha+=haha;
             }else {
                 System.out.println("ENTER A POSITIVE INTEGER!!!!!");
                 haha++;

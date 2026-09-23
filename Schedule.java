@@ -1,4 +1,3 @@
-import java.util.*;
 public class Schedule {
     private int scheduleID;
     private int totalDays;
