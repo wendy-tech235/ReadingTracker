@@ -60,8 +60,6 @@ public class ReadingTracker {
     }
     
     public void setUpBooks() {
-        //System.out.println("How many books are you reading?");
-        //int numBooks = Integer.parseInt(scanner.nextLine());
         int numBooks = inputVaildPosInt("How many books are you reading?");
         for (int i = 0; i < numBooks; i++) {
             System.out.println("-------------------");
@@ -69,9 +67,6 @@ public class ReadingTracker {
 
             System.out.println("Enter book name:");
             String bookName = scanner.nextLine();
-
-            //System.out.println("Enter total book pages:");
-            //int totalPages = Integer.parseInt(scanner.nextLine());
             int totalPages = inputVaildPosInt("Enter total book pages:");
 
             Book book = new Book(bookName, i, totalPages);
@@ -85,8 +80,6 @@ public class ReadingTracker {
         for (int i = 0; i < books.size(); i++) {
             System.out.println("--------------------");
             System.out.println("Book " + (i + 1) + ", book name: " + books.get(i).getBookName());
-            //System.out.println("Enter how many days you want to finish " + books.get(i).getBookName());
-            //int totalDays = Integer.parseInt(scanner.nextLine());
             int totalDays = inputVaildPosInt("Enter how many days you want to finish " + books.get(i).getBookName());
             Schedule schedule = new Schedule(i, totalDays, books.get(i));
             schedules.add(schedule);
@@ -166,10 +159,6 @@ public class ReadingTracker {
                 Schedule schedule = schedules.get(scheduleIndex);
                 if (schedule.getPagesNotRead() == 0)
                     continue;
-                
-                //System.out.println("Enter how many pages you read for book " + 
-                    //schedules.get(scheduleIndex).getBook().getBookName() + ", pages not read: " + schedule.getPagesNotRead());
-                //int currPages = Integer.parseInt(scanner.nextLine());
                 int currPages = inputVaildPosInt("Enter how many pages you read for book " + 
                     schedules.get(scheduleIndex).getBook().getBookName() + ", pages not read: " + schedule.getPagesNotRead());
                 if (currPages >= schedule.getPagesNotRead()) {
