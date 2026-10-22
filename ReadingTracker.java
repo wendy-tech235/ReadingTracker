@@ -50,8 +50,8 @@ public class ReadingTracker {
 
                 return value;
             }else if(value > 1000){ 
-                System.out.println("There is no way your reading that much, you are an alien and I'm calling Area 51...please enter lower than 1000");
-                haha+=haha;
+                System.out.println("There is no way your reading that much, it seems to me you are an alien and I'm calling Area 51...please enter lower than 1000");
+                haha++;
             }else {
                 System.out.println("ENTER A POSITIVE INTEGER!!!!!");
                 haha++;
@@ -68,8 +68,9 @@ public class ReadingTracker {
             System.out.println("Enter book name:");
             String bookName = scanner.nextLine();
             int totalPages = inputVaildPosInt("Enter total book pages:");
+            double price = inputVaildPosInt("Enter book price:");
 
-            Book book = new Book(bookName, i, totalPages);
+            Book book = new Book(bookName, i, totalPages, price);
             books.add(book);
         }
         System.out.println();
@@ -105,9 +106,9 @@ public class ReadingTracker {
 
     public void printBooksInfo() {
         System.out.println("--------------------");
-        System.out.printf("%-10s %-30s %12s%n","Book ID", "Book Name", "Total Pages");
+        System.out.printf("%-10s %-30s %12s %12s%n","Book ID", "Book Name", "Total Pages", "Price");
         for (Book book : books) {
-            System.out.printf("%-10d %-30s %12d%n", book.getBookID(), book.getBookName(), book.getTotalPages());
+            System.out.printf("%-10d %-30s %12d %12.2f%n", book.getBookID(), book.getBookName(), book.getTotalPages(), book.getPrice());
         }
     }
 

@@ -2,17 +2,20 @@ public class Book {
     private String bookName;
     private int bookID;
     private int totalPages;
+    private double price;
 
     public Book() {
         bookName = "";
         bookID = 0;
         totalPages = 0;
+        price = 0.0;
     }
 
-    public Book(String bookName, int bookID, int totalPages){
+    public Book(String bookName, int bookID, int totalPages, double price) {
         this.bookName = bookName;
         this.bookID = bookID;
         this.totalPages = totalPages;
+        this.price = price;
     }
 
     public String getBookName() {
@@ -37,5 +40,13 @@ public class Book {
 
     public void setTotalPages(int totalPages) {
         this.totalPages = totalPages;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
