@@ -8,6 +8,7 @@ public class ReadingTracker {
     private List<List<Tracker>> trackers;
     private static int DAYS_PER_ROW = 5;
     private Scanner scanner = new Scanner(System.in);
+    public static int numBooks = 0;
 
     public ReadingTracker() {
         this.books = new Book[MAX_BOOKS];  
@@ -62,10 +63,39 @@ public class ReadingTracker {
         }
     }
     
+    public double inputVaildPosDouble(String prompt) {
+        int haha = 0;
+        System.out.println(prompt);
+        while (true) {
+            boolean isValid = true;
+            double value = 0;
+            String textValue = scanner.nextLine();
+            try {
+                value = Double.parseDouble(textValue);
+                if(value <= 0 || value > 1000)
+                    isValid = false;
+            } catch (Exception e) {
+                isValid = false;
+            }
+            if (isValid) {
+                if(haha > 0)
+                    System.out.println("See that wasn't so hard :D");
+
+                return value;
+            }else if(value > 1000){ 
+                System.out.println("Inflation is not that high, please enter a double less than 1000");
+                haha += 1;
+            }else{
+                System.out.println("ENTER A POSITIVE DOUBLE!!!!!");
+                haha++;
+            }
+        }
+    }
+
     //precondition: NA
     //postcondition: adds the books to the list of books based on user input
     public void setUpBooks() {
-        int numBooks = inputVaildPosInt("How many books are you reading? (Enter less than or equal to 10, if you don't then I will find you)");
+        numBooks = inputVaildPosInt("How many books are you reading? (Enter less than or equal to 10, if you don't then I will find you)");
         for (int i = 0; i < numBooks; i++) {
             System.out.println("-------------------");
             System.out.println("Book " + (i + 1));
@@ -73,8 +103,8 @@ public class ReadingTracker {
             System.out.println("Enter book name:");
             String bookName = scanner.nextLine();
             int totalPages = inputVaildPosInt("Enter total book pages:");
-            double price = inputVaildPosInt("Enter book price:");
-
+            double price = inputVaildPosDouble("Enter book price:");
+            
             Book book = new Book(bookName, i, totalPages, price);
             books[i] = book;
         }
@@ -85,7 +115,7 @@ public class ReadingTracker {
     //precondition: NA
     //postcondition: makes a schedule for each book and adds it to the list of schedules
     public void setUpSchedules(){
-        for (int i = 0; i < books.length; i++) {
+        for (int i = 0; i < numBooks; i++) {
             if (books[i] == null) break;
             System.out.println("--------------------");
             System.out.println("Book " + (i + 1) + ", book name: " + books[i].getBookName());
@@ -112,8 +142,8 @@ public class ReadingTracker {
     public void printBooksInfo() {
         System.out.println("--------------------");
         System.out.printf("%-10s %-30s %12s %12s%n","Book ID", "Book Name", "Total Pages", "Price");
-        for (Book book : books) {
-            System.out.printf("%-10d %-30s %12d %12.2f%n", book.getBookID(), book.getBookName(), book.getTotalPages(), book.getPrice());
+        for (int i = 0; i < numBooks; i++) {
+            System.out.printf("%-10d %-30s %12d %12.2f%n", books[i].getBookID(), books[i].getBookName(), books[i].getTotalPages(), books[i].getPrice());
         }
     }
 
@@ -158,9 +188,9 @@ public class ReadingTracker {
     }
     
 
-    //precondition: NA
+    //precondition: a valid Score
     //postcondition: tracks the reading for each book in one day and adds it to the list of trackers
-    public void trackReading() {
+    public void trackReading(Score score) {
         int day = 0;
         while (true) {
             System.out.println("--------------------");
@@ -174,18 +204,22 @@ public class ReadingTracker {
                     schedules.get(scheduleIndex).getBook().getBookName() + ", pages not read: " + schedule.getPagesNotRead());
                 if (currPages >= schedule.getPagesNotRead()) {
                     System.out.println("Only " + schedule.getPagesNotRead() + 
-                        " pages left, so today count " + schedule.getPagesNotRead() + " pages read.");
+                        " pages left, so todays count " + schedule.getPagesNotRead() + " pages read.");
                     currPages = schedule.getPagesNotRead();
-                }
+                } 
+                score.calculatePointsInDay();
+                score.addTotalPoints();
                 int leftPages = schedule.getPagesNotRead() - currPages;
                 if (leftPages > 0)
                     hasLeftPage = true;
                 
                 schedule.setPagesNotRead(leftPages);
-                
                 Tracker tracker = new Tracker(schedule, day, currPages, trackerID);
                 trackerID++;
                 this.trackers.get(scheduleIndex).add(tracker);
+                
+                System.out.println("Total points: " + score.getTotalPoints() + ", total earned in a day: " + score.getEarnInDay());
+                score.resetEarnInDay();
             }
             if (!hasLeftPage)
                 break;
@@ -211,6 +245,7 @@ public class ReadingTracker {
     }
 
     public static void main(String[] args) {
+        Score score = new Score();
         ReadingTracker readingTracker = new ReadingTracker();
 
         System.out.println("Step 1: Setup Book Information");
@@ -232,7 +267,7 @@ public class ReadingTracker {
         System.out.println("Step 3: Track Reading");
         System.out.println("=======================");
         readingTracker.initTrackers();
-        readingTracker.trackReading();
+        readingTracker.trackReading(score);
         System.out.println();
         System.out.println();
 
