@@ -1,7 +1,8 @@
 import java.util.*;
 
 public class ReadingTracker {
-    private List<Book> books;
+    private static int MAX_BOOKS = 10;
+    private Book[] books; 
     private List<Schedule> schedules;
     private int trackerID = 0;
     private List<List<Tracker>> trackers;
@@ -9,12 +10,12 @@ public class ReadingTracker {
     private Scanner scanner = new Scanner(System.in);
 
     public ReadingTracker() {
-        this.books = new ArrayList<>();
+        this.books = new Book[MAX_BOOKS];  
         this.schedules = new ArrayList<>();
         this.trackers = new ArrayList<>();
     }
 
-    public List<Book> getBooks() {
+    public Book[] getBooks() {
         return books;
     }
 
@@ -22,7 +23,7 @@ public class ReadingTracker {
         return schedules;
     }
 
-    public void setBooks(List<Book> books) {
+    public void setBooks(Book[] books) {
         this.books = books;
     }
 
@@ -30,6 +31,8 @@ public class ReadingTracker {
         this.schedules = schedules;
     }
 
+    //precondition: prompt needs to be a string
+    //postcondition: checks if the input is a positive integer, if not it will reprompt until it is
     public int inputVaildPosInt(String prompt) {
         int haha = 0;
         System.out.println(prompt);
@@ -51,16 +54,18 @@ public class ReadingTracker {
                 return value;
             }else if(value > 1000){ 
                 System.out.println("There is no way your reading that much, it seems to me you are an alien and I'm calling Area 51...please enter lower than 1000");
-                haha++;
-            }else {
+                haha += 1;
+            }else{
                 System.out.println("ENTER A POSITIVE INTEGER!!!!!");
                 haha++;
             }
         }
     }
     
+    //precondition: NA
+    //postcondition: adds the books to the list of books based on user input
     public void setUpBooks() {
-        int numBooks = inputVaildPosInt("How many books are you reading?");
+        int numBooks = inputVaildPosInt("How many books are you reading? (Enter less than or equal to 10, if you don't then I will find you)");
         for (int i = 0; i < numBooks; i++) {
             System.out.println("-------------------");
             System.out.println("Book " + (i + 1));
@@ -71,22 +76,27 @@ public class ReadingTracker {
             double price = inputVaildPosInt("Enter book price:");
 
             Book book = new Book(bookName, i, totalPages, price);
-            books.add(book);
+            books[i] = book;
         }
         System.out.println();
         System.out.println("Good choices!");
     }
 
+    //precondition: NA
+    //postcondition: makes a schedule for each book and adds it to the list of schedules
     public void setUpSchedules(){
-        for (int i = 0; i < books.size(); i++) {
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] == null) break;
             System.out.println("--------------------");
-            System.out.println("Book " + (i + 1) + ", book name: " + books.get(i).getBookName());
-            int totalDays = inputVaildPosInt("Enter how many days you want to finish " + books.get(i).getBookName());
-            Schedule schedule = new Schedule(i, totalDays, books.get(i));
+            System.out.println("Book " + (i + 1) + ", book name: " + books[i].getBookName());
+            int totalDays = inputVaildPosInt("Enter how many days you want to finish " + books[i].getBookName());
+            Schedule schedule = new Schedule(i, totalDays, books[i]);
             schedules.add(schedule);
         }
     }
 
+    //precondition: NA
+    //postcondition: prints out the schedules and their information in a table
     public void printSchedule() {
         System.out.println("--------------------");
         System.out.printf("%-10s %-30s %12s %12s %12s%n","Book ID", "Book Name", "Total Pages", "Total Days", "Pages/Day");
@@ -97,13 +107,8 @@ public class ReadingTracker {
         }
     }
 
-    private int caculateMaxDays() {
-        int maxDays = 0;
-        for (Schedule schedule : schedules)
-            maxDays = Math.max(maxDays, schedule.getTotalDays());
-        return maxDays;
-    }
-
+    //precondition: NA
+    //postcondition: prints out the books and their information in a table
     public void printBooksInfo() {
         System.out.println("--------------------");
         System.out.printf("%-10s %-30s %12s %12s%n","Book ID", "Book Name", "Total Pages", "Price");
@@ -112,6 +117,8 @@ public class ReadingTracker {
         }
     }
 
+    //precondition: scheduleIndex is a valid index in the list
+    //postcondition: prints out the calendar for the day which is the index
     public void printCalendar(Schedule schedule, int scheduleIndex) {
         int totalDays = trackers.get(scheduleIndex).size();
         int pagesPerDay = schedule.getPagesPerDay();
@@ -150,6 +157,9 @@ public class ReadingTracker {
         }
     }
     
+
+    //precondition: NA
+    //postcondition: tracks the reading for each book in one day and adds it to the list of trackers
     public void trackReading() {
         int day = 0;
         while (true) {
@@ -189,6 +199,8 @@ public class ReadingTracker {
         }
     }
 
+    //precondition: NA
+    //postcondition: prints out the reading schedule for the days in the calender for each book
     public void report(){
         for(int i = 0; i < schedules.size(); i++) {
             System.out.println("--------------------");

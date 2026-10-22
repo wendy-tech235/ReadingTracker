@@ -1,11 +1,16 @@
 
 public class Tracker {
     private int trackerID;
-    private int numberOfPoints;
-    private int earnPoints;
     private int currDay;
     private int currPages;
     private Schedule schedule;
+    
+    public Tracker() {
+        trackerID = 0;
+        currDay = 0;
+        currPages = 0;
+        schedule = new Schedule();
+    }
 
     public Tracker(Schedule schedule, int currDay, int currPages, int trackerID) {
         this.schedule = schedule;
@@ -26,13 +31,6 @@ public class Tracker {
         this.schedule = schedule;
     }
 
-    public int getNumberOfPoints() {
-        return numberOfPoints;
-    }
-
-    public int getEarnPoints() {
-        return earnPoints;
-    }
 
     public int getCurrDay() {
         return currDay;
@@ -46,13 +44,6 @@ public class Tracker {
         this.trackerID = trackerID;
     }
 
-    public void setNumberOfPoints(int numberOfPoints) {
-        this.numberOfPoints = numberOfPoints;
-    }
-
-    public void setEarnPoints(int earnPoints) {
-        this.earnPoints = earnPoints;
-    }
 
     public void setCurrDay(int currDay) {
         this.currDay = currDay;
@@ -60,14 +51,5 @@ public class Tracker {
 
     public void setCurrPages(int currPages) {
         this.currPages = currPages;
-    }
-
-    public void calander(){
-        int remainDays = schedule.getTotalDays() % 5;
-        for(int row = 1; row <= schedule.getTotalDays()/ 5; row++){
-            for(int col = 1; col <= 5; col++){
-                
-            }
-        }
     }
 }

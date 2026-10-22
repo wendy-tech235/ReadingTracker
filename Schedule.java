@@ -5,6 +5,14 @@ public class Schedule {
     private Book book;
     private int pagesNotRead;
 
+    public Schedule() {
+        scheduleID = 0;
+        totalDays = 0;
+        pagesPerDay = 0;
+        book = new Book();
+        pagesNotRead = 0;
+    }
+
     public Schedule(int scheduleID, int totalDays, Book book) {
         this.scheduleID = scheduleID;
         this.totalDays = totalDays;
