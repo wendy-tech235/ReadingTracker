@@ -56,20 +56,28 @@ public class Score {
         return "Score: " + "totalPoints:" + this.totalPoints + ", total earned in a day:" + this.earnInDay;
     }
 
+    //precondition: score object has been initialized
+    //postcondition: Increases daily points by 1 and returns the updated daily points
     public int calculatePointsInDay() {
         this.earnInDay += earnRequired;
         return this.earnInDay;
     }
-
+    
+    //extraPages is a nonnegative integer.
+    //increases daily points by 3 times extraPages and returns the updated daily points
     public int calculateExtraPointsInDay(int extraPages) {
         this.earnInDay += extraPages * earnExtra;
         return this.earnInDay;
     }
 
+    //precondition: score object has been initialized
+    //postcondition: resets daily points to 0
     public void resetEarnInDay() {
         this.earnInDay = 0;
     }
 
+    //precondition: score object has been initialized
+    //postcondition: Adds daily points to total points and returns the updated total points
     public int addTotalPoints() {
         this.totalPoints += earnInDay;
         return this.totalPoints;

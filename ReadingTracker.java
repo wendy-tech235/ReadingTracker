@@ -26,12 +26,6 @@ public class ReadingTracker {
         return schedules;
     }
 
-    /* 
-    public Score getScores(){
-        return score;
-    }
-    */
-
     public void setBooks(Book[] books) {
         this.books = books;
     }
@@ -39,14 +33,20 @@ public class ReadingTracker {
     public void setSchedules(List<Schedule> schedules) {
         this.schedules = schedules;
     }
-/* 
-    public void setScores(){
-        this.score = score;
-    } 
-*/
 
-    //precondition: prompt needs to be a string
-    //postcondition: checks if the input is a positive integer, if not it will reprompt until it is
+    // precondition: numBooks is a positive integer that is the array length of books
+    //Postcondition: returns a string array containing the elements of book
+    public String[] booksInfo() {
+        String[] bookInfo = new String[numBooks];
+        for (int i = 0; i < numBooks; i++) {
+            bookInfo[i] = "Book number: " + (books[i].getBookID() + 1) + ", Book Name: " + books[i].getBookName() +
+                    ", Total Pages: " + books[i].getTotalPages() + ", Price: " + books[i].getPrice();
+        }
+        return bookInfo;
+    }
+
+    //precondition: prompt needs to be a string thats not empty 
+    //postcondition: checks if the input is a positive integer thats less than or equal to 1000, if not it will reprompt until it is
     public int inputVaildPosInt(String prompt) {
         int haha = 0;
         System.out.println(prompt);
@@ -76,6 +76,8 @@ public class ReadingTracker {
         }
     }
     
+    //precondition: prompt needs to be a string thats not empty 
+    //postcondition: checks if the input is a positive double thats less than or equal to 1000.0, if not it will reprompt until it is
     public double inputVaildPosDouble(String prompt) {
         int haha = 0;
         System.out.println(prompt);
@@ -105,8 +107,8 @@ public class ReadingTracker {
         }
     }
 
-    //precondition: NA
-    //postcondition: adds the books to the list of books based on user input
+    //precondition: user has to input a positive integer less than or equal to 10
+    //postcondition: creates and stores the number of books using the information entered by the user
     public void setUpBooks() {
         numBooks = inputVaildPosInt("How many books are you reading? (Enter less than or equal to 10, if you don't then I will find you)");
         for (int i = 0; i < numBooks; i++) {
@@ -125,7 +127,7 @@ public class ReadingTracker {
         System.out.println("Good choices!");
     }
 
-    //precondition: NA
+    //precondition: user has to input a positive integer for the number of days they want to finish the book
     //postcondition: makes a schedule for each book and adds it to the list of schedules
     public void setUpSchedules(){
         for (int i = 0; i < numBooks; i++) {
@@ -138,7 +140,7 @@ public class ReadingTracker {
         }
     }
 
-    //precondition: NA
+    //precondition: schedules is not empty
     //postcondition: prints out the schedules and their information in a table
     public void printSchedule() {
         System.out.println("--------------------");
@@ -150,15 +152,6 @@ public class ReadingTracker {
         }
     }
 
-    //precondition: NA
-    //postcondition: prints out the books and their information in a table
-    public void printBooksInfo() {
-        System.out.println("--------------------");
-        System.out.printf("%-10s %-30s %12s %12s%n","Book ID", "Book Name", "Total Pages", "Price");
-        for (int i = 0; i < numBooks; i++) {
-            System.out.printf("%-10d %-30s %12d %12.2f%n", books[i].getBookID(), books[i].getBookName(), books[i].getTotalPages(), books[i].getPrice());
-        }
-    }
 
     //precondition: scheduleIndex is a valid index in the list
     //postcondition: prints out the calendar for the day which is the index
@@ -246,13 +239,15 @@ public class ReadingTracker {
         }        
     }
 
+    //precondition: schedules is not empty
+    //postcondition: initializes the trackers for each schedule in the list of schedules
     public void initTrackers() {
         for (Schedule schedule : schedules) {
             trackers.add(new ArrayList<>());
         }
     }
 
-    //precondition: NA
+    //precondition: schedules is not empty
     //postcondition: prints out the reading schedule for the days in the calender for each book
     public void report(){
         for(int i = 0; i < schedules.size(); i++) {
@@ -276,6 +271,7 @@ public class ReadingTracker {
         System.out.println("No points for not meeting the required amount");
         System.out.println("Good Luck!");
 
+        System.out.println();
         System.out.println("================================");
         ReadingTracker readingTracker = new ReadingTracker();
 
@@ -283,7 +279,11 @@ public class ReadingTracker {
         System.out.println("==============================");
         readingTracker.setUpBooks();
         System.out.println();
-        readingTracker.printBooksInfo();
+        //readingTracker.printBooksInfo()
+        System.out.println("-------------------");
+        for (int i = 0; i < ReadingTracker.numBooks; i++) {
+            System.out.println(readingTracker.booksInfo()[i]);
+        }
         System.out.println();
         System.out.println();
 
