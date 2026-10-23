@@ -35,7 +35,7 @@ public class ReadingTracker {
     }
 
     // precondition: numBooks is a positive integer that is the array length of books
-    //Postcondition: returns a string array containing the elements of book
+    //postcondition: returns a string array containing the elements of book
     public String[] booksInfo() {
         String[] bookInfo = new String[numBooks];
         for (int i = 0; i < numBooks; i++) {
@@ -257,6 +257,7 @@ public class ReadingTracker {
             printCalendar(schedules.get(i), i);
         }
         System.out.println(score.getTotalPoints());
+        Score.calculateScoreStatus(score.getTotalPoints(), 50);
     }
 
     public static void main(String[] args) {

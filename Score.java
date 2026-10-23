@@ -82,5 +82,16 @@ public class Score {
         this.totalPoints += earnInDay;
         return this.totalPoints;
     }
+
+    //precondition: score has to be a nonnegative integer and num has to be a nonnegative integer
+    //postcondition: compares the score to num and prints out a message 
+    //this is a static method because it does not care about the object but rather the values of score and num and calling it with the class itself without needing an object
+    public static void calculateScoreStatus(int score, int num) {
+        if (score > num) {
+            System.out.println("You have exceeded your reading goal!");
+        }else if (score == num) {
+            System.out.println("You have met your reading goal!");
+        }
+    }
 }
 
