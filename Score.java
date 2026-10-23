@@ -88,9 +88,9 @@ public class Score {
     //this is a static method because it does not care about the object but rather the values of score and num and calling it with the class itself without needing an object
     public static void calculateScoreStatus(int score, int num) {
         if (score > num) {
-            System.out.println("You have exceeded your reading goal!");
+            System.out.println("You have gotten more than " + num + " points! Thats impressive!");
         }else if (score == num) {
-            System.out.println("You have met your reading goal!");
+            System.out.println("You got " + num + " points! Thats suspiciously perfect");
         }
     }
 }

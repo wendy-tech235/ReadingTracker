@@ -256,7 +256,7 @@ public class ReadingTracker {
             System.out.println("Calender for " + book.getBookName());
             printCalendar(schedules.get(i), i);
         }
-        System.out.println(score.getTotalPoints());
+        System.out.println("Total points: " + score.getTotalPoints());
         Score.calculateScoreStatus(score.getTotalPoints(), 50);
     }
 
