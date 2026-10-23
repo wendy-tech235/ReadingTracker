@@ -46,8 +46,39 @@ public class ReadingTracker {
     }
 
     //precondition: prompt needs to be a string thats not empty 
+    //postcondition: checks if the input is a positive integer thats less than or equal to 10, if not it will reprompt until it is
+    public int inputVaildPosIntLowerRange(String prompt) {
+        int haha = 0;
+        System.out.println(prompt);
+        while (true) {
+            boolean isValid = true;
+            int value = 0;
+            String textValue = scanner.nextLine();
+            try {
+                value = Integer.parseInt(textValue); 
+                if(value <= 0 || value > 10)
+                    isValid = false;
+            } catch (Exception e) {
+                isValid = false;
+            }
+            if (isValid) {
+                if(haha > 0)
+                    System.out.println("See that wasn't so hard :D");
+
+                return value;
+            }else if(value > 10){ 
+                System.out.println("I said less than 10! Come on, learn to read!");
+                haha += 1;
+            }else{
+                System.out.println("ENTER A POSITIVE INTEGER!!!!!");
+                haha++;
+            }
+        }
+    }
+
+    //precondition: prompt needs to be a string thats not empty 
     //postcondition: checks if the input is a positive integer thats less than or equal to 1000, if not it will reprompt until it is
-    public int inputVaildPosInt(String prompt) {
+    public int inputVaildPosIntHigherRange(String prompt) {
         int haha = 0;
         System.out.println(prompt);
         while (true) {
@@ -110,14 +141,14 @@ public class ReadingTracker {
     //precondition: user has to input a positive integer less than or equal to 10
     //postcondition: creates and stores the number of books using the information entered by the user
     public void setUpBooks() {
-        numBooks = inputVaildPosInt("How many books are you reading? (Enter less than or equal to 10, if you don't then I will find you)");
+        numBooks = inputVaildPosIntLowerRange("How many books are you reading? (Enter less than or equal to 10, if you don't then I will find you)");
         for (int i = 0; i < numBooks; i++) {
             System.out.println("-------------------");
             System.out.println("Book " + (i + 1));
 
             System.out.println("Enter book name:");
             String bookName = scanner.nextLine();
-            int totalPages = inputVaildPosInt("Enter total book pages:");
+            int totalPages = inputVaildPosIntHigherRange("Enter total book pages:");
             double price = inputVaildPosDouble("Enter book price:");
             
             Book book = new Book(bookName, i, totalPages, price);
@@ -134,7 +165,7 @@ public class ReadingTracker {
             if (books[i] == null) break;
             System.out.println("--------------------");
             System.out.println("Book " + (i + 1) + ", book name: " + books[i].getBookName());
-            int totalDays = inputVaildPosInt("Enter how many days you want to finish " + books[i].getBookName());
+            int totalDays = inputVaildPosIntHigherRange("Enter how many days you want to finish " + books[i].getBookName());
             Schedule schedule = new Schedule(i, totalDays, books[i]);
             schedules.add(schedule);
         }
@@ -206,7 +237,7 @@ public class ReadingTracker {
                 Schedule schedule = schedules.get(scheduleIndex);
                 if (schedule.getPagesNotRead() == 0)
                     continue;
-                int currPages = inputVaildPosInt("Enter how many pages you read for book " + 
+                int currPages = inputVaildPosIntHigherRange("Enter how many pages you read for book " + 
                     schedules.get(scheduleIndex).getBook().getBookName() + ", pages not read: " + schedule.getPagesNotRead());
                 if (currPages >= schedule.getPagesNotRead()) {
                     System.out.println("Only " + schedule.getPagesNotRead() + 
@@ -265,11 +296,11 @@ public class ReadingTracker {
         System.out.println("I assuming you would like to track your reading!");
         System.out.println("Heres how it works");
         System.out.println("I will ask you questions about your books");
-        System.out.println("Then based on how many days you want to complete the book, I will make a schedule for you");
+        System.out.println("Then based on how many days you want to complete the book, a schedule will be made for you");
         System.out.println("Based on how much you read and weither not you met the required amount of pages, you will earn points");
-        System.out.println("1 point for meeting the required amount, which is your goal");
-        System.out.println("Additonal 3 points for every extra page you read");
-        System.out.println("No points for not meeting the required amount");
+        System.out.println("- 1 point for meeting the required amount, which is your goal");
+        System.out.println("- 3 points for every extra page you read");
+        System.out.println("- No points for not meeting the required amount");
         System.out.println("Good Luck!");
 
         System.out.println();

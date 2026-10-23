@@ -91,6 +91,8 @@ public class Score {
             System.out.println("You have gotten more than " + num + " points! Thats impressive!");
         }else if (score == num) {
             System.out.println("You got " + num + " points! Thats suspiciously perfect");
+        }else {
+            System.out.println("Nice job!");
         }
     }
 }
