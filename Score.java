@@ -7,8 +7,8 @@ public class Score {
     private static int earnExtra = 3;
 
     public Score() {
-        totalPoints = 0;
-        earnInDay = 0;
+        this.totalPoints = 0;
+        this.earnInDay = 0;
         requiredMet = false;
         extraMet = false;
     }
@@ -36,25 +36,43 @@ public class Score {
         this.earnInDay = earnInDay;
     }
 
+    public boolean getRequiredMet(){
+        return requiredMet;
+    }
+
+    public void setRequiredMet(boolean requiredMet){
+        this.requiredMet = requiredMet;
+    }
+
+    public boolean getExtraMet(){
+        return extraMet;
+    }
+
+    public void setExtraMet(boolean extraMet){
+        this.extraMet = extraMet;
+    }
+
     public String toString() {
-        return "Score: " + "totalPoints:" + totalPoints + ", total earned in a day:" + earnInDay;
+        return "Score: " + "totalPoints:" + this.totalPoints + ", total earned in a day:" + this.earnInDay;
     }
 
     public int calculatePointsInDay() {
-        if (extraMet) {
-            earnInDay += earnExtra;
-        } else if (requiredMet) {
-            earnInDay += earnRequired;
-        }
-        return earnInDay;
+        this.earnInDay += earnRequired;
+        return this.earnInDay;
+    }
+
+    public int calculateExtraPointsInDay(int extraPages) {
+        this.earnInDay += extraPages * earnExtra;
+        return this.earnInDay;
     }
 
     public void resetEarnInDay() {
-        earnInDay = 0;
+        this.earnInDay = 0;
     }
 
     public int addTotalPoints() {
-        totalPoints += earnInDay;
-        return totalPoints;
+        this.totalPoints += earnInDay;
+        return this.totalPoints;
     }
 }
+

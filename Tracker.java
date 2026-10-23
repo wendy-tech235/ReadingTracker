@@ -1,4 +1,3 @@
-
 public class Tracker {
     private int trackerID;
     private int currDay;
@@ -53,3 +52,4 @@ public class Tracker {
         this.currPages = currPages;
     }
 }
+

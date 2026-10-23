@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class ReadingTracker {
+    private Score score = new Score();
     private static int MAX_BOOKS = 10;
     private Book[] books; 
     private List<Schedule> schedules;
@@ -14,6 +15,7 @@ public class ReadingTracker {
         this.books = new Book[MAX_BOOKS];  
         this.schedules = new ArrayList<>();
         this.trackers = new ArrayList<>();
+        this.score = new Score();
     }
 
     public Book[] getBooks() {
@@ -24,6 +26,12 @@ public class ReadingTracker {
         return schedules;
     }
 
+    /* 
+    public Score getScores(){
+        return score;
+    }
+    */
+
     public void setBooks(Book[] books) {
         this.books = books;
     }
@@ -31,6 +39,11 @@ public class ReadingTracker {
     public void setSchedules(List<Schedule> schedules) {
         this.schedules = schedules;
     }
+/* 
+    public void setScores(){
+        this.score = score;
+    } 
+*/
 
     //precondition: prompt needs to be a string
     //postcondition: checks if the input is a positive integer, if not it will reprompt until it is
@@ -190,7 +203,7 @@ public class ReadingTracker {
 
     //precondition: a valid Score
     //postcondition: tracks the reading for each book in one day and adds it to the list of trackers
-    public void trackReading(Score score) {
+    public void trackReading() {
         int day = 0;
         while (true) {
             System.out.println("--------------------");
@@ -207,8 +220,14 @@ public class ReadingTracker {
                         " pages left, so todays count " + schedule.getPagesNotRead() + " pages read.");
                     currPages = schedule.getPagesNotRead();
                 } 
-                score.calculatePointsInDay();
-                score.addTotalPoints();
+                if(currPages > schedule.getPagesPerDay()){
+                    score.setEarnInDay(score.calculateExtraPointsInDay(currPages - schedule.getPagesPerDay()));
+                }else if(currPages == schedule.getPagesPerDay()){
+                    score.setEarnInDay(score.calculatePointsInDay());
+                }
+                
+                score.setTotalPoints(score.addTotalPoints()); 
+                
                 int leftPages = schedule.getPagesNotRead() - currPages;
                 if (leftPages > 0)
                     hasLeftPage = true;
@@ -242,10 +261,22 @@ public class ReadingTracker {
             System.out.println("Calender for " + book.getBookName());
             printCalendar(schedules.get(i), i);
         }
+        System.out.println(score.getTotalPoints());
     }
 
     public static void main(String[] args) {
-        Score score = new Score();
+        System.out.println("Welcome to the Reading Tracker!");
+        System.out.println("I assuming you would like to track your reading!");
+        System.out.println("Heres how it works");
+        System.out.println("I will ask you questions about your books");
+        System.out.println("Then based on how many days you want to complete the book, I will make a schedule for you");
+        System.out.println("Based on how much you read and weither not you met the required amount of pages, you will earn points");
+        System.out.println("1 point for meeting the required amount, which is your goal");
+        System.out.println("Additonal 3 points for every extra page you read");
+        System.out.println("No points for not meeting the required amount");
+        System.out.println("Good Luck!");
+
+        System.out.println("================================");
         ReadingTracker readingTracker = new ReadingTracker();
 
         System.out.println("Step 1: Setup Book Information");
@@ -267,7 +298,7 @@ public class ReadingTracker {
         System.out.println("Step 3: Track Reading");
         System.out.println("=======================");
         readingTracker.initTrackers();
-        readingTracker.trackReading(score);
+        readingTracker.trackReading();
         System.out.println();
         System.out.println();
 
@@ -275,8 +306,6 @@ public class ReadingTracker {
         System.out.println("=======================");
         readingTracker.report();
 
-        // test
-        // test2
     }
 }
 //Neev
